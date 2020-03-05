@@ -10,7 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -35,6 +40,24 @@ public class MainActivity extends FragmentActivity {
             R.drawable.ic_entertainment,
             R.drawable.ic_economics
     };
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        TabLayout tabLayoutR = findViewById(R.id.tablayout);
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+            new TabLayoutMediator(tabLayoutR, viewPager,
+                    (tab, position) -> tab.setText(tabNames.get(position))
+            ).attach();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+            new TabLayoutMediator(tabLayoutR, viewPager,
+                    (tab, position) -> tab.setIcon(tabIcons[position])
+            ).attach();
+        }
+    }
 
 
     @Override
@@ -80,6 +103,8 @@ public class MainActivity extends FragmentActivity {
             super.onBackPressed();
         }
     }
+
+
     /**
      * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
      * sequence.
