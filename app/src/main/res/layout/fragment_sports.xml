@@ -3,20 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_light"
     tools:context=".SportsFragment">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/recyler">
+            android:layout_height="wrap_content"
+            android:id="@+id/recycler">
 
         </androidx.recyclerview.widget.RecyclerView>
 
-
-    </LinearLayout>
 
 </FrameLayout>

@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:id="@+id/cardView"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="6dp">
+        app:cardElevation="4dp">
 
 
 

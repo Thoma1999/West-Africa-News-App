@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:id="@+id/drawer_layout"
     tools:context=".MainActivity"
-    tools:openDrawer="start">
+    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,7 +21,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:logo="@drawable/ic_launcher_foreground"
-            app:title="West Africa News"/>
+            app:title="West Africa News" />
 
 
 
@@ -36,12 +36,13 @@
         </com.google.android.material.tabs.TabLayout>
 
 
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/tablayout">
+            android:layout_above="@id/tablayout"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="1dp">
 
 
         </androidx.viewpager2.widget.ViewPager2>
