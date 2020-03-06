@@ -29,57 +29,25 @@ import retrofit2.Response;
 
 public class SportsFragment extends Fragment {
     RecyclerView recyclerView;
-    final String API_KEY = "2956c968ba214518826b4c6a940a877f";
     AdapterH adapter;
     List<Articles> articles = new ArrayList<>();
-    List<Articles> topFive = new ArrayList<>();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sports, container, false);
-        recyclerView = view.findViewById(R.id.recycler);
-        final String country = getCountry();
+        recyclerView = view.findViewById(R.id.recyclerTopSports);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        retrieveJson(country,API_KEY);
+        TopFiveGetter ta = new TopFiveGetter(this, articles, adapter,recyclerView);
+        ta.retrieveJson();
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         return view;
     }
 
-    public void retrieveJson(String country, String apiKey){
 
 
-        Call<Headlines> call;
-        call = ApiClient.getInstance().getApi().getHeadlines(country,apiKey);
-
-        call.enqueue(new Callback<Headlines>() {
-            @Override
-            public void onResponse(Call<Headlines> call, Response<Headlines> response) {
-                if (response.isSuccessful() && response.body().getArticles() != null){
-                    articles.clear();
-                    articles = response.body().getArticles();
-                    topFive = articles.subList(0,5);
-                    articles.subList(0,5).clear();
-                    adapter = new AdapterH(articles);
-                    recyclerView.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Headlines> call, Throwable t) {
-                Toast.makeText(getActivity(), "Failed to load", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public String getCountry(){
-        Locale locale = Locale.getDefault();
-        String country = locale.getCountry();
-        return country.toLowerCase();
-    }
 
 
 }

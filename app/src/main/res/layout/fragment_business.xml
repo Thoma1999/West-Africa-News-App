@@ -3,15 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BusinessFragment"
-    android:background="@android:color/holo_red_light">
+    tools:context=".BusinessFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTopBusiness"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Business"
-        android:textSize="20sp" />
+        android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
+
 
 </FrameLayout>
