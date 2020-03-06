@@ -61,8 +61,8 @@ public class SportsFragment extends Fragment {
                 if (response.isSuccessful() && response.body().getArticles() != null){
                     articles.clear();
                     articles = response.body().getArticles();
-                    topFive = articles.subList(0,5);
-                    articles.subList(0,5).clear();
+                    //topFive = articles.subList(0,5);
+                    //articles.subList(0,5).clear();
                     adapter = new AdapterH(articles);
                     recyclerView.setAdapter(adapter);
                 }
