@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -44,19 +45,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        TabLayout tabLayoutR = findViewById(R.id.tablayout);
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-            new TabLayoutMediator(tabLayoutR, viewPager,
-                    (tab, position) -> tab.setText(tabNames.get(position))
-            ).attach();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-            new TabLayoutMediator(tabLayoutR, viewPager,
-                    (tab, position) -> tab.setIcon(tabIcons[position])
-            ).attach();
-        }
+        setTabs();
     }
 
 
@@ -77,15 +66,9 @@ public class MainActivity extends FragmentActivity {
         pagerAdapter = new ScreenSlidePagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
 
-        TabLayout tabLayout = findViewById(R.id.tablayout);
-        new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> tab.setIcon(tabIcons[position])
-        ).attach();
-
+        setTabs();
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         drawer = findViewById(R.id.drawer_layout);
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -101,6 +84,19 @@ public class MainActivity extends FragmentActivity {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    public void setTabs() {
+        TabLayout tabLayout = findViewById(R.id.tablayout);
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            new TabLayoutMediator(tabLayout, viewPager,
+                    (tab, position) -> tab.setText(tabNames.get(position))
+            ).attach();
+        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            new TabLayoutMediator(tabLayout, viewPager,
+                    (tab, position) -> tab.setIcon(tabIcons[position])
+            ).attach();
         }
     }
 
