@@ -28,23 +28,37 @@ import retrofit2.Response;
 
 
 public class SportsFragment extends Fragment {
-    RecyclerView recyclerView;
-    AdapterH adapter;
+    RecyclerView recyclerViewTop;
+    RecyclerView recyclerViewBottom;
+    AdapterV adapterV;
+    AdapterH adapterH;
     List<Articles> articles = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sports, container, false);
-        recyclerView = view.findViewById(R.id.recyclerTopSports);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
-        TopFiveGetter ta = new TopFiveGetter(this, articles, adapter,recyclerView);
-        ta.retrieveJson();
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewTop = view.findViewById(R.id.recyclerTopSports);
+        recyclerViewBottom = view.findViewById(R.id.recyclerSports);
+        final LinearLayoutManager layoutManagerV = new LinearLayoutManager(getActivity());
+        final LinearLayoutManager layoutManagerH = new LinearLayoutManager(getActivity());
+        layoutManagerV.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManagerH.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerViewBottom.setLayoutManager(layoutManagerV);
+        recyclerViewTop.setLayoutManager(layoutManagerH);
+
+        TopFiveGetter tvg = new TopFiveGetter(this, articles, adapterH,recyclerViewTop);
+        tvg.retrieveJson();
+        ArticleGetter ag = new ArticleGetter(this, articles, adapterV,recyclerViewTop);
+        ag.retrieveJson();
+        recyclerViewTop.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewBottom.setItemAnimator(new DefaultItemAnimator());
         return view;
     }
+
+
+
 
 
 

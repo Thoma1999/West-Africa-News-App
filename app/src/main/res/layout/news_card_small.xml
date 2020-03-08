@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -16,48 +17,78 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp">
+            android:layout_height="120dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
-            <ProgressBar
-                android:id="@+id/loaderSmall"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center" />
+                <ProgressBar
+                    android:id="@+id/loader"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageSmall"
+                    app:layout_constraintEnd_toEndOf="@+id/imageSmall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageSmall"
-                android:layout_width="130dp"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                <ImageView
+                    android:id="@+id/imageSmall"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TITLE"
-                android:layout_gravity="center_horizontal"
-                android:padding="10dp"
-                android:textSize="20dp"
-                android:textColor="@android:color/black"
-                android:id="@+id/tvTitleSmall"/>
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|bottom">
-                <TextView
-                    android:id="@+id/tvDateSmall"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="5 hour ago"
+                    android:layout_gravity="bottom"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageSmall"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvDateSmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tvTitleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginLeft="120dp"
+                    android:padding="10dp"
                     android:textColor="@android:color/black"
-                    android:textSize="15dp" />
-
-            </LinearLayout>
-
-
-
+                    android:textSize="18sp"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </FrameLayout>
 
     </androidx.cardview.widget.CardView>

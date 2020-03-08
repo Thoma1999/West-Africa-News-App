@@ -1,5 +1,7 @@
 package com.ca.wannews;
 
+import android.app.Activity;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +18,17 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 import java.util.Locale;
 
+
+
 public class AdapterV extends RecyclerView.Adapter<AdapterV.ViewHolder> {
     List<Articles> articles;
+    List<Articles> topFive;
+    AdapterH adapterH;
 
     public AdapterV(List<Articles> articles){
-        this.articles = articles;
+        this.articles = articles.subList(5,20);
     }
+
 
     @NonNull
     @Override
@@ -34,14 +41,10 @@ public class AdapterV extends RecyclerView.Adapter<AdapterV.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull AdapterV.ViewHolder holder, int position) {
         final Articles a = articles.get(position);
-
         String imageUrl = a.getUrlToImage();
         String url = a.getUrl();
-
         holder.tvTitle.setText(a.getTitle());
-        holder.tvSource.setText(a.getSource().getName());
         holder.tvDate.setText(a.getPublishedAt());
-
         Picasso.get().load(imageUrl).into(holder.imageView);
 
 
@@ -54,24 +57,29 @@ public class AdapterV extends RecyclerView.Adapter<AdapterV.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvTitle,tvSource,tvDate;
+        TextView tvTitle,tvDate;
         ImageView imageView;
         CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvSource = itemView.findViewById(R.id.tvSource);
-            tvDate = itemView.findViewById(R.id.tvDate);
-            imageView = itemView.findViewById(R.id.image);
-            cardView = itemView.findViewById(R.id.cardView);
+            tvTitle = itemView.findViewById(R.id.tvTitleSmall);
+            tvDate = itemView.findViewById(R.id.tvDateSmall);
+            imageView = itemView.findViewById(R.id.imageSmall);
+            cardView = itemView.findViewById(R.id.cardViewSmall);
 
         }
     }
+
+
+
     public String getCountry(){
         Locale locale = Locale.getDefault();
         String country = locale.getCountry();
         return country.toLowerCase();
     }
+
+
 }
+
