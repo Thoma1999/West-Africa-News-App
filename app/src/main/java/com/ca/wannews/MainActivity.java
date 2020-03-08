@@ -12,6 +12,8 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -61,7 +63,6 @@ public class MainActivity extends FragmentActivity {
         viewPager = findViewById(R.id.viewpager);
         pagerAdapter = new ScreenSlidePagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
-
         setTabs();
         Toolbar toolbar = findViewById(R.id.toolbar);
         drawer = findViewById(R.id.drawer_layout);
@@ -95,6 +96,9 @@ public class MainActivity extends FragmentActivity {
             ).attach();
         }
     }
+
+
+
 
 
     /**
