@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ca.wannews.API.Articles;
 import com.ca.wannews.API.Headlines;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,20 +23,21 @@ public class TopFiveGetter {
     private AdapterH adapter;
     private RecyclerView recyclerView;
     private String country;
-    public static final String apiKey =  "2956c968ba214518826b4c6a940a877f";
+    private String category;
+    public static final String apiKey =  "75027d38c2b24007877746164b263116";
 
-    public TopFiveGetter(Fragment fa, List<Articles> articles, AdapterH adapter, RecyclerView recyclerView){
+    public TopFiveGetter(Fragment fa,  RecyclerView recyclerView, String category){
         this.fa = fa;
-        this.articles = articles;
-        this.adapter = adapter;
+        articles = new ArrayList<>();
         this.recyclerView = recyclerView;
-        country = getCountry();
+        country = "ng";
+        this.category = category;
     }
 
     public void retrieveJson(){
 
         Call<Headlines> call;
-        call = ApiClient.getInstance().getApi().getHeadlines(country,apiKey);
+        call = ApiClient.getInstance().getApi().getHeadlines(country, category, apiKey);
 
         call.enqueue(new Callback<Headlines>() {
             @Override

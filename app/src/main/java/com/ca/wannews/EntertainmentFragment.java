@@ -21,20 +21,35 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class EntertainmentFragment extends Fragment {
-    RecyclerView recyclerView;
-    AdapterH adapter;
-    List<Articles> articles = new ArrayList<>();
+    RecyclerView recyclerViewTop;
+    RecyclerView recyclerViewBottom;
+    LinearLayoutManager layoutManagerH, layoutManagerV;
+    final static String CATEGORY = "entertainment";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_entertainment, container, false);
-        recyclerView = view.findViewById(R.id.recyclerTopEntertainment);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
-        TopFiveGetter ta = new TopFiveGetter(this, articles, adapter,recyclerView);
-        ta.retrieveJson();
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewTop = view.findViewById(R.id.recyclerTopEntertainment);
+        recyclerViewTop.setHasFixedSize(true);
+        layoutManagerH = new LinearLayoutManager(getActivity());
+        layoutManagerH.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerViewTop.setLayoutManager(layoutManagerH);
+        TopFiveGetter tvg = new TopFiveGetter(this, recyclerViewTop,CATEGORY);
+        tvg.retrieveJson();
+        recyclerViewTop.setItemAnimator(new DefaultItemAnimator());
+
+
+        recyclerViewBottom= view.findViewById(R.id.recyclerEntertainment);
+        recyclerViewBottom.setHasFixedSize(true);
+        layoutManagerV = new LinearLayoutManager(getActivity());
+        layoutManagerV.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewBottom.setLayoutManager(layoutManagerV);
+        ArticleGetter ag = new ArticleGetter(this, recyclerViewBottom, CATEGORY);
+        ag.retrieveJson();
+        recyclerViewBottom.setItemAnimator(new DefaultItemAnimator());
+
+
         return view;
     }
 
