@@ -13,6 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ca.wannews.API.Articles;
 import com.squareup.picasso.Picasso;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,7 +45,7 @@ public class AdapterH extends RecyclerView.Adapter<AdapterH.ViewHolder> {
 
         holder.tvTitle.setText(a.getTitle());
         holder.tvSource.setText(a.getSource().getName());
-        holder.tvDate.setText(a.getPublishedAt());
+        holder.tvDate.setText(dateTime(a.getPublishedAt()));
 
         Picasso.get().load(imageUrl).into(holder.imageView);
 
@@ -68,6 +73,19 @@ public class AdapterH extends RecyclerView.Adapter<AdapterH.ViewHolder> {
             cardView = itemView.findViewById(R.id.cardView);
 
         }
+    }
+    public String dateTime(String t){
+        PrettyTime prettyTime = new PrettyTime(new Locale(getCountry()));
+        String time = null;
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:",Locale.ENGLISH);
+            Date date = simpleDateFormat.parse(t);
+            time = prettyTime.format(date);
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
+
     }
     public String getCountry(){
         Locale locale = Locale.getDefault();

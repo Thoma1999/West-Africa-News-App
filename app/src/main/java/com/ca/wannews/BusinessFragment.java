@@ -19,20 +19,33 @@ import java.util.List;
 
 
 public class BusinessFragment extends Fragment {
-    RecyclerView recyclerView;
-    AdapterH adapter;
-    List<Articles> articles = new ArrayList<>();
+    RecyclerView recyclerViewTop;
+    RecyclerView recyclerViewBottom;
+    LinearLayoutManager layoutManagerH, layoutManagerV;
+    final static String CATEGORY = "business";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_business, container, false);
-        recyclerView = view.findViewById(R.id.recyclerTopBusiness);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
-        TopFiveGetter ta = new TopFiveGetter(this, articles, adapter,recyclerView);
-        ta.retrieveJson();
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewTop = view.findViewById(R.id.recyclerTopBusiness);
+        recyclerViewTop.setHasFixedSize(true);
+        layoutManagerH = new LinearLayoutManager(getActivity());
+        layoutManagerH.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerViewTop.setLayoutManager(layoutManagerH);
+        TopFiveGetter tvg = new TopFiveGetter(this, recyclerViewTop,CATEGORY);
+        tvg.retrieveJson();
+        recyclerViewTop.setItemAnimator(new DefaultItemAnimator());
+
+
+        recyclerViewBottom= view.findViewById(R.id.recyclerBusiness);
+        recyclerViewBottom.setHasFixedSize(true);
+        layoutManagerV = new LinearLayoutManager(getActivity());
+        layoutManagerV.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewBottom.setLayoutManager(layoutManagerV);
+        ArticleGetter ag = new ArticleGetter(this, recyclerViewBottom,CATEGORY);
+        ag.retrieveJson();
+        recyclerViewBottom.setItemAnimator(new DefaultItemAnimator());
+
         return view;
 
     }

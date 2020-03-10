@@ -2,8 +2,6 @@ package com.ca.wannews;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,35 +10,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.ca.wannews.API.Articles;
-import com.ca.wannews.API.Headlines;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
-public class SportsFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class HealthFragment extends Fragment {
     RecyclerView recyclerViewTop;
     RecyclerView recyclerViewBottom;
     LinearLayoutManager layoutManagerH, layoutManagerV;
-    final static String CATEGORY = "sports";
-
-
-
+    final static String CATEGORY = "health";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sports, container, false);
-
-        recyclerViewTop = view.findViewById(R.id.recyclerTopSports);
+        View view = inflater.inflate(R.layout.fragment_health, container, false);
+        recyclerViewTop = view.findViewById(R.id.recyclerTopHealth);
         recyclerViewTop.setHasFixedSize(true);
         layoutManagerH = new LinearLayoutManager(getActivity());
         layoutManagerH.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -50,7 +34,7 @@ public class SportsFragment extends Fragment {
         recyclerViewTop.setItemAnimator(new DefaultItemAnimator());
 
 
-        recyclerViewBottom= view.findViewById(R.id.recyclerSports);
+        recyclerViewBottom= view.findViewById(R.id.recyclerHealth);
         recyclerViewBottom.setHasFixedSize(true);
         layoutManagerV = new LinearLayoutManager(getActivity());
         layoutManagerV.setOrientation(LinearLayoutManager.VERTICAL);
@@ -61,12 +45,4 @@ public class SportsFragment extends Fragment {
 
         return view;
     }
-
-
-
-
-
-
-
-
 }

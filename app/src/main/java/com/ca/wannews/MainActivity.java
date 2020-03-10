@@ -12,8 +12,6 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -37,7 +35,7 @@ public class MainActivity extends FragmentActivity {
             R.drawable.ic_business,
             R.drawable.ic_technology,
             R.drawable.ic_entertainment,
-            R.drawable.ic_economics
+            R.drawable.ic_health
     };
 
     @Override
@@ -124,7 +122,7 @@ public class MainActivity extends FragmentActivity {
                 case 3:
                     return new EntertainmentFragment();
                 case 4:
-                    return new EconomicsFragment();
+                    return new HealthFragment();
                 default:
                     return null;
             }
