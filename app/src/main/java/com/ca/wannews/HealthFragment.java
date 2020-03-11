@@ -29,8 +29,7 @@ public class HealthFragment extends Fragment {
         layoutManagerH = new LinearLayoutManager(getActivity());
         layoutManagerH.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerViewTop.setLayoutManager(layoutManagerH);
-        TopFiveGetter tvg = new TopFiveGetter(this, recyclerViewTop,CATEGORY);
-        tvg.retrieveJson();
+        new ArticleGetter().execute(this, recyclerViewTop,CATEGORY, getActivity(),0);
         recyclerViewTop.setItemAnimator(new DefaultItemAnimator());
 
 
@@ -39,8 +38,7 @@ public class HealthFragment extends Fragment {
         layoutManagerV = new LinearLayoutManager(getActivity());
         layoutManagerV.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewBottom.setLayoutManager(layoutManagerV);
-        ArticleGetter ag = new ArticleGetter(this, recyclerViewBottom,CATEGORY);
-        ag.retrieveJson();
+        new ArticleGetter().execute(this, recyclerViewBottom,CATEGORY, getActivity(),1);
         recyclerViewBottom.setItemAnimator(new DefaultItemAnimator());
 
         return view;

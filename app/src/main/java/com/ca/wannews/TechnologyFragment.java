@@ -11,11 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ca.wannews.API.Articles;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,22 +28,18 @@ public class TechnologyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_technology, container, false);
         recyclerViewTop = view.findViewById(R.id.recyclerTopTechnology);
-        recyclerViewTop.setHasFixedSize(true);
         layoutManagerH = new LinearLayoutManager(getActivity());
         layoutManagerH.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerViewTop.setLayoutManager(layoutManagerH);
-        TopFiveGetter tvg = new TopFiveGetter(this, recyclerViewTop, CATEGORY);
-        tvg.retrieveJson();
+        new ArticleGetter().execute(this, recyclerViewTop,CATEGORY, getActivity(),0);
         recyclerViewTop.setItemAnimator(new DefaultItemAnimator());
 
 
         recyclerViewBottom= view.findViewById(R.id.recyclerTechnology);
-        recyclerViewBottom.setHasFixedSize(true);
         layoutManagerV = new LinearLayoutManager(getActivity());
         layoutManagerV.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewBottom.setLayoutManager(layoutManagerV);
-        ArticleGetter ag = new ArticleGetter(this, recyclerViewBottom, CATEGORY);
-        ag.retrieveJson();
+        new ArticleGetter().execute(this, recyclerViewBottom,CATEGORY, getActivity(),1);
         recyclerViewBottom.setItemAnimator(new DefaultItemAnimator());
 
         return view;

@@ -2,6 +2,7 @@ package com.ca.wannews;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -10,9 +11,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -21,7 +25,7 @@ import java.util.ArrayList;
 
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements NavigationView.OnNavigationItemSelectedListener {
     ViewPager2 viewPager;
     private DrawerLayout drawer;
 
@@ -50,12 +54,18 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
 
         tabNames.add("Sports");
         tabNames.add("Business");
         tabNames.add("Technology");
         tabNames.add("Entertainment");
         tabNames.add("Economics");
+
+        //Navigation view
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         // Instantiate a ViewPager2 and a PagerAdapter.
         viewPager = findViewById(R.id.viewpager);
@@ -69,8 +79,20 @@ public class MainActivity extends FragmentActivity {
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+    }
 
-
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_settings:
+                Intent intent = new Intent(this,SettingsActivity.class);
+                this.startActivity(intent);
+                break;
+            case R.id.nav_about:
+                break;
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     @Override

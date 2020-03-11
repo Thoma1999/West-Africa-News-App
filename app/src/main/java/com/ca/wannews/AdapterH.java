@@ -1,5 +1,7 @@
 package com.ca.wannews;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ca.wannews.API.Articles;
-import com.squareup.picasso.Picasso;
-
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.text.ParseException;
@@ -23,9 +24,11 @@ import java.util.Locale;
 
 public class AdapterH extends RecyclerView.Adapter<AdapterH.ViewHolder> {
     List<Articles> articles;
+    Context context;
 
-    public AdapterH(List<Articles> articles){
-        this.articles = articles;
+    public AdapterH(List<Articles> articles, Context context){
+        this.articles = articles.subList(0,5);
+        this.context = context;
     }
 
     @NonNull
@@ -47,7 +50,32 @@ public class AdapterH extends RecyclerView.Adapter<AdapterH.ViewHolder> {
         holder.tvSource.setText(a.getSource().getName());
         holder.tvDate.setText(dateTime(a.getPublishedAt()));
 
-        Picasso.get().load(imageUrl).into(holder.imageView);
+        Glide.with(context).load(imageUrl).into(holder.imageView);
+
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ViewArticle.class);
+                intent.putExtra("title",a.getTitle());
+                intent.putExtra("source",a.getSource().getName());
+                intent.putExtra("time",dateTime(a.getPublishedAt()));
+                intent.putExtra("desc",a.getDescription());
+                intent.putExtra("imageUrl",a.getUrlToImage());
+                intent.putExtra("url",a.getUrl());
+                context.startActivity(intent);
+            }
+        });
+
+        holder.cardView.setOnLongClickListener(v -> {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, url);
+            sendIntent.setType("text/plain");
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            context.startActivity(shareIntent);
+            return false;
+        });
 
 
 
