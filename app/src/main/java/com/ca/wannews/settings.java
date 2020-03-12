@@ -11,14 +11,17 @@ import android.widget.Switch;
 
 public class settings extends AppCompatActivity {
     DMsharedPref dMsharedPref;
-    Switch dmSwitch;
+    private Switch dmSwitch;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        dMsharedPref = new DMsharedPref(this);
+        if (dMsharedPref.loadNightModeState() == true) {
+            setTheme(R.style.darktheme);
+        } else setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        dMsharedPref = new DMsharedPref(this);
         dmSwitch = (Switch)findViewById(R.id.DMSwitch);
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             dmSwitch.setChecked(true);
