@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBackground"
     android:orientation="vertical"
+    android:background="?attr/backgroundColor"
     tools:context=".ViewArticle">
 
     <ScrollView
@@ -14,18 +14,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="?attr/backgroundColor">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="?attr/backgroundColor">
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/mainBackground"
+                app:cardBackgroundColor="?attr/cardBackgroundColor"
                 app:cardElevation="4dp">
 
                 <LinearLayout
@@ -90,7 +92,7 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:text="TITLE"
-                        android:textColor="@color/mainText"
+                        android:textColor="?attr/textcolor"
                         android:textSize="20sp" />
 
                     <TextView
@@ -99,19 +101,19 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:text="Description"
-                        android:textColor="@color/mainText"
+                        android:textColor="?attr/textcolor"
                         android:textSize="15sp" />
                 </LinearLayout>
 
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/mainBackground"
+                app:cardBackgroundColor="?attr/cardBackgroundColor"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="4dp">
 

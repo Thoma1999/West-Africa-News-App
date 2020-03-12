@@ -14,7 +14,10 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -28,6 +31,8 @@ import java.util.ArrayList;
 public class MainActivity extends FragmentActivity implements NavigationView.OnNavigationItemSelectedListener {
     ViewPager2 viewPager;
     private DrawerLayout drawer;
+    DMsharedPref dMsharedPref;
+
 
     private static final int NUM_PAGES = 5;
     private FragmentStateAdapter pagerAdapter;
@@ -49,13 +54,17 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
     }
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
+        dMsharedPref = new DMsharedPref(this);
+        if (dMsharedPref.loadNightModeState() == true) {
+            setTheme(R.style.darktheme);
+        } else setTheme(R.style.AppTheme);
 
         tabNames.add("Sports");
         tabNames.add("Business");
@@ -79,17 +88,25 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
+
+
+
     }
+
+
+
+
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.nav_settings:
-                Intent intent = new Intent(this,SettingsActivity.class);
-                this.startActivity(intent);
-                break;
             case R.id.nav_about:
                 break;
+            case R.id.nav_settings:
+                startActivity(new Intent(this,settings.class));
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

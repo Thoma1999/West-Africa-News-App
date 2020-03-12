@@ -5,14 +5,12 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBackground"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/mainBackground">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -31,7 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/mainBackground"
             android:elevation="4dp"
             app:tabIconTint="@color/colorPrimary">
 
@@ -44,8 +41,7 @@
             android:layout_height="match_parent"
             android:layout_above="@id/tablayout"
             android:layout_below="@+id/toolbar"
-            android:layout_marginTop="1dp"
-            android:background="@color/mainBackground">
+            android:layout_marginTop="1dp">
 
 
         </androidx.viewpager2.widget.ViewPager2>
@@ -57,9 +53,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#FFFFFF"
         app:headerLayout="@layout/burger_open"
-        app:menu="@menu/burger_menu" />
+        app:menu="@menu/burger_menu"
+        android:background="?attr/backgroundColor"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
 

@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HealthFragment">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="?attr/backgroundColor">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerTopHealth"
                 android:layout_width="match_parent"
@@ -26,10 +26,6 @@
             </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
-
-    </ScrollView>
-
-
 
 
 

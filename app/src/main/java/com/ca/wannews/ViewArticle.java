@@ -26,6 +26,8 @@ public class ViewArticle extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.view_article);
 
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
             tvTitle = findViewById(R.id.tvTitle);
             tvSource = findViewById(R.id.tvSource);
             tvTime = findViewById(R.id.tvDate);
